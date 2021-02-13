@@ -9,12 +9,12 @@ using namespace std;
 using namespace std::chrono;
 
 int main(){
-	int mcs=10000;
+	int mcs=10000; //set monte carlo sweeps//
 	srand(time(0));
 	Simulation sim1;
 	Observables ob1;
 
-	sim1.initparameters(16,16,16.0);
+	sim1.initparameters(16,16,16.0); //(Lx,Ly,beta)//
 	sim1.make_lattice();
 	sim1.initspinstate();
 
