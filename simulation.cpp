@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void Simulation :: initparameters(int lx, int ly, float invt){
+void Simulation :: initparameters(int lx, int ly, float invt, int nofbins, int mcsperbin){
 	Lx=lx;
 	Ly=ly;
 	N=Lx*Ly;
@@ -14,6 +14,8 @@ void Simulation :: initparameters(int lx, int ly, float invt){
 	beta=invt;
 	n_op=0;
 	L=N/2;
+	nbins=nofbins;
+	mcs=mcsperbin;
 	probfactor=0.5*beta*Nb;
 	opstring.reserve(L);
 	for(int p=0; p<L; p++){opstring.push_back(Operator());}
