@@ -10,19 +10,22 @@ void Simulation :: initparameters(int lx, int ly, float invt, int nofbins, int m
 	Lx=lx;
 	Ly=ly;
 	N=Lx*Ly;
-	Nb=2*N;
 	beta=invt;
 	n_op=0;
 	L=N/2;
 	nbins=nofbins;
 	mcs=mcsperbin;
-	probfactor=0.5*beta*Nb;
 	opstring.reserve(L);
 	for(int p=0; p<L; p++){opstring.push_back(Operator());}
 	spin = new int[N];
 	vfirst = new int[N];
 	vlast = new int[N];
+	
+	if(ly == 1){Nb=N;}
+	else{Nb=2*N;}
+
 	bondlist = new bond[Nb];
+	probfactor=0.5*beta*Nb;
 
 	for(int i=0; i<N; i++){vfirst[i]=-1; vlast[i]=-1;}
 }
@@ -37,6 +40,15 @@ void Simulation :: make_lattice(){
 			bondlist[index+N].i=index;
 			bondlist[index+N].j=x + ((y+1)%Ly)*Lx;
 		}
+	}
+}
+
+void Simulation :: make_1Dlattice(){
+	int index;
+	for(int x=0; x<Lx; x++){
+		index=x;
+		bondlist[index].i=index;
+		bondlist[index].j=(x+1)%Lx;
 	}
 }
 
