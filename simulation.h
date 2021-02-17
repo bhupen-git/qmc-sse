@@ -10,7 +10,7 @@ class Simulation{
 
 	struct bond{int i; int j;};
 
-	int Lx, Ly, n_op, L, N, Nb;
+	int Lx, Ly, n_op, L, N, Nb, nbins, mcs;
 	float beta, probfactor;
 	const float a=1.0/3.0;
 	int *spin,*vfirst,*vlast;
@@ -18,7 +18,7 @@ class Simulation{
 	vector<Operator> opstring;
 
 	public:
-	void initparameters(int, int, float);
+	void initparameters(int, int, float, int, int);
 	void make_lattice();
 	void initspinstate();
 	void diagonalupdate();
