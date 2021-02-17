@@ -27,7 +27,7 @@ void Observables :: updt_Ebinavg(Simulation obj){E_binavg += obj.n_op;}
 
 void Observables :: collect_Ebinavg(Simulation obj){
 	E_binavg=E_binavg/((float) obj.mcs);
-	E_binavg=E_binavg/(obj.beta*obj.N) - 0.5;
+	E_binavg=E_binavg/(obj.beta*obj.N) - obj.Nb/((float) 4.0*obj.N);
 	Ebins.push_back(E_binavg);
 	E_binavg=0.0;
 }
