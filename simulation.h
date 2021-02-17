@@ -20,6 +20,7 @@ class Simulation{
 	public:
 	void initparameters(int, int, float, int, int);
 	void make_lattice();
+	void make_1Dlattice();
 	void initspinstate();
 	void diagonalupdate();
 	void make_vertexlist();
