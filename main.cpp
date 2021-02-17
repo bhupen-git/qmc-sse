@@ -16,8 +16,8 @@ int main(){
 	Simulation sim1;
 	Observables ob1;
 
-	sim1.initparameters(8,8,4.0,nbins,mcs); //(Lx,Ly,beta,nbins,mcsperbin)//
-	sim1.make_lattice();
+	sim1.initparameters(16,1,256.0,nbins,mcs); //(Lx,Ly,beta,nbins,mcsperbin)//
+	sim1.make_1Dlattice();
 	sim1.initspinstate();
 	ob1.init_energy(sim1);
 
