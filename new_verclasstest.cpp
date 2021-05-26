@@ -54,7 +54,7 @@ class Plaquette: public Vertex{
 int main(){
 	int i1,i2,i3;
 	vector<Vertex *> opstring;
-	stack<leg> cluster;
+	stack<leg *> cluster;
 	leg *leg_top;
 	leg leg_t;
 	leg *vfirst[3], *vlast[3];
@@ -106,35 +106,30 @@ int main(){
 			}
 		}
 	}
-	(opstring[0]->leg_array[0]).set_visit = true;
-	(opstring[0]->leg_array[2]).set_visit = true;
-	(opstring[3]->leg_array[1]).set_visit = true;
-	(opstring[4]->leg_array[1]).set_visit = true;
+	//(opstring[0]->leg_array[0]).set_visit = true;
+	//(opstring[0]->leg_array[2]).set_visit = true;
+	//(opstring[3]->leg_array[1]).set_visit = true;
+	//(opstring[4]->leg_array[1]).set_visit = true;
 
-	cluster.push(opstring[3]->leg_array[0]);
-	//if(cluster.empty()){cout<<"empty";}
-	leg_t = cluster.top();
-	cout<<leg_t.set_visit;
-	leg_top = &(cluster.top());
-
+	cluster.push(&(opstring[3]->leg_array[0]));
+	//while(! cluster.empty()){
+	for(int i=0; i<22; i++){
+		leg_top = cluster.top();
+		if(leg_top->set_visit){leg_top = NULL; cluster.pop();}
+		else if(opstring[leg_top->loc_in_opstring]->vertex_type == 2){
 			cluster.push(leg_top->ptr_to_leg);
-	////while(! cluster.empty()){
-	//for(int i=0; i<4; i++){
-	//	leg_top = &(cluster.top());
-	//	//cout<<&(cluster.top());
-	//	if(leg_top->set_visit){cluster.pop();}
-	//	else if(opstring[leg_top->loc_in_opstring]->vertex_type == 2){
-	//		cluster.push(*(leg_top->ptr_to_leg));
-	//		//break;
-	//		leg_top->set_visit = true;
-	//	}
-	//	else{
-	//		for(int i=0; i<4; i++){
-	//			cluster.push(*(((opstring[leg_top->loc_in_opstring])->leg_array[i]).ptr_to_leg));
-	//			(opstring[leg_top->loc_in_opstring]->leg_array[i]).set_visit = true;
-	//		}
-	//	}
-	//}
+			leg_top->set_visit = true;
+		}
+		else{
+			for(int i=0; i<4; i++){
+				(opstring[leg_top->loc_in_opstring]->leg_array[i]).set_visit = true;
+				cluster.push(((opstring[leg_top->loc_in_opstring])->leg_array[i]).ptr_to_leg);
+			}
+		}
+	}
+	
+	while(! cluster.empty()){cout<<(cluster.top())->loc_in_opstring; cluster.pop();}
+	
 
 	return 0;
 }
